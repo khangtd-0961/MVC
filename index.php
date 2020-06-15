@@ -1,6 +1,8 @@
 <?php
-use Model\SinhVien as SinhVien;
-include 'config.php';
+
+use Model\SinhVien;
+
+include 'Model/Sinhvien.php';
 include 'header.php';
 ?>
 <div id="menu">
@@ -35,8 +37,8 @@ include 'header.php';
     // $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     // $results = $stmt->fetchAll();
 
-    $result = Sinhvien::getAll();
-
+    $result = new Model\Sinhvien();
+    $results = $result->getAll($sql);
     $newArr = [];
     $count=0;
     foreach ($results as $key => $value) {

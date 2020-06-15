@@ -1,17 +1,17 @@
 <?php
-require_once '../config.php';
-require 'config.php';
+namespace Model;
 
-namespace Model\SinhVien;
+require 'config.php';
 
 class SinhVien
 {
     public function getAll($sql)
     {
+        global $conn;
         try {
+            // $sql = 'SELECT classes.class_name, students.*, subject_point.points  FROM students INNER JOIN classes ON students.class_code_id = classes.class_code INNER JOIN subject_point ON students.student_code = subject_point.code_student_id';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             
             return $results;
@@ -21,3 +21,4 @@ class SinhVien
     
     }
 }
+// var_dump( SinhVien::getAll());
