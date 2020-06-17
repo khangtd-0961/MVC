@@ -1,13 +1,13 @@
 <?php
 include 'config.php';
 include 'header.php';
+
+use Model\Sinhvien;
 ?>
 <?php
 $id = isset($_GET['id']) && is_numeric($_GET['id']) ? $_GET['id'] : 0;
 $sql = "SELECT students.*, subject_point.points, subject_point.subject ,subject_point.id FROM studentsRIGHT JOIN subject_point ON students.student_code = subject_point.code_student_id WHERE students.id = $id";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll();
+$result = Sinhvien::getAll($sql);
 $newArrPoint = [];
 
 foreach ($result as $key => $value) {
