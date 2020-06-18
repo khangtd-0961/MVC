@@ -1,9 +1,5 @@
-<?php
-include 'config.php';
-include 'header.php';
-?>
 <div class="form-style-5">
-  <form method="POST" enctype="multipart/form-data" action="DB.php?action=add">
+  <form method="POST" enctype="multipart/form-data" action="index.php?controller=SinhVienController&action=add">
     <fieldset>
       <legend style="text-align: center;"><span class="number"></span> Add <span class="number"></span></legend>
       <label>Studen Code</label>
@@ -13,17 +9,13 @@ include 'header.php';
         <optgroup>
           <option value="">---</option>
           <?php
-            $sql = 'SELECT class_code,class_name FROM classes';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            foreach ($stmt->fetchAll() as $arr) {
+          foreach ($result as $arr) {
                 ?>
             <option value="<?php echo isset($arr['class_code']) ? $arr['class_code'] : null; ?>">
                 <?php echo isset($arr['class_name']) ? $arr['class_name'] : null; ?>
             </option>
                 <?php
-            }
+          }
             ?>
         </optgroup>
       </select>
@@ -51,6 +43,3 @@ include 'header.php';
     <input type="submit" value="Apply" />
   </form>
 </div>
-<?php
-include 'footer.php';
-?>
