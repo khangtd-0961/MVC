@@ -1,4 +1,4 @@
-<div><a href="add.php">ADD</a></div>
+<div><a href="index.php?controller=SinhVienController&action=toAdd">ADD</a></div>
 &nbsp;
 <table>
     <tr>
@@ -15,9 +15,6 @@
         <td>Action</td>
     </tr>
     <?php
-    $sql = 'SELECT classes.class_name, students.*, subject_point.points  FROM students INNER JOIN classes ON students.class_code_id = classes.class_code INNER JOIN subject_point ON students.student_code = subject_point.code_student_id';
-    $result = new Model\Sinhvien();
-    $results = $result->getAll($sql);
     $newArr = [];
     $count=0;
     foreach ($results as $key => $value) {
@@ -56,9 +53,9 @@
                 echo '<td>' . $values . '</td>';
             } ?>
             <td style="text-align: center;">
-                 <a href="edit.php?id=<?php echo $row['id'];?>">Edit</a>
+                 <a href="index.php?controller=SinhVienController&action=toEdit&id=<?php echo $row['id'];?>">Edit</a>
                 &nbsp;&nbsp;
-                <a href="DB.php?action=delete&id=<?php echo $row['id'];?>&code_student_id=<?php echo $row['student_code'];?>" >Delete</a>
+                <a href="index.php?controller=SinhVienController&action=delete&id=<?php echo $row['id'];?>&code_student_id=<?php echo $row['student_code'];?>" >Delete</a>
             </td>
         </tr>
         <?php

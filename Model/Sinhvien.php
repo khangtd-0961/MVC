@@ -2,7 +2,6 @@
 namespace Model;
 
 require 'config.php';
-echo 'model';
 class SinhVien
 {
     public function getAll($sql)

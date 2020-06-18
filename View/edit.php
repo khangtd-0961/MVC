@@ -1,15 +1,6 @@
 <?php
-include 'config.php';
-include 'header.php';
 
-use Model\Sinhvien;
-?>
-<?php
-$id = isset($_GET['id']) && is_numeric($_GET['id']) ? $_GET['id'] : 0;
-$sql = "SELECT students.*, subject_point.points, subject_point.subject ,subject_point.id FROM studentsRIGHT JOIN subject_point ON students.student_code = subject_point.code_student_id WHERE students.id = $id";
-$result = Sinhvien::getAll($sql);
 $newArrPoint = [];
-
 foreach ($result as $key => $value) {
     $newArrPoint['id'] = $value[0];
     $newArrPoint['student_code'] = $value['student_code'];
@@ -22,7 +13,7 @@ foreach ($result as $key => $value) {
 }
 ?>
   <div class="form-style-5">
-    <form method="POST" enctype="multipart/form-data" action="DB.php?action=edit&id=<?php echo $newArrPoint['id']; ?>">
+    <form method="POST" enctype="multipart/form-data" action="index.php?controller=SinhVienController&action=edit&id=<?php echo $newArrPoint['id']; ?>">
       <fieldset>
         <legend style="text-align:center"><span class="number"></span> Edit <span class="number"></span></legend>
         <label>Studen Code</label>
@@ -31,11 +22,7 @@ foreach ($result as $key => $value) {
         <select id="class_code_id" name="class_code_id">
           <option value="">---</option>
           <?php
-            $sql = 'SELECT class_code,class_name FROM classes';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            foreach ($stmt->fetchAll() as $newArrPointr) {
+            foreach ($results as $newArrPointr) {
                 ?>
             <option <?php echo isset($newArrPoint['class_code_id']) && $newArrPoint['class_code_id'] == $newArrPointr['class_code'] ? 'selected' : ''; ?>
             value="<?php echo isset($newArrPointr['class_code']) ? $newArrPointr['class_code'] : null; ?>">
@@ -72,6 +59,3 @@ foreach ($result as $key => $value) {
       <input type="submit" value="Apply" />
     </form>
   </div>
-    <?php
-    include 'footer.php';
-    ?>
